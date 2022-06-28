@@ -1,43 +1,22 @@
 package com.borisov.movies.ui.movies
 
+import com.borisov.movies.R
+import com.borisov.movies.databinding.FragmentMoviesBinding
+import com.borisov.movies.domain.IAppState
+import com.borisov.movies.ui.base.BaseFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 /**
  * @author Borisov Andrey on 27.06.2022
  **/
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.borisov.movies.databinding.FragmentMoviesBinding
 
-class MoviesFragment : Fragment() {
+class MoviesFragment : BaseFragment<FragmentMoviesBinding>(R.layout.fragment_movies) {
 
-    private var _binding: FragmentMoviesBinding? = null
+    val viewModel: MoviesViewModel by viewModel()
 
-    private val binding get() = _binding!!
+    override fun initListeners() {}
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(MoviesViewModel::class.java)
+    override fun initObservers() {}
 
-        _binding = FragmentMoviesBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    override fun renderData(result: IAppState) {}
 }

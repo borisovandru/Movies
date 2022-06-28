@@ -1,44 +1,21 @@
 package com.borisov.movies.ui.settings
 
+import com.borisov.movies.R
+import com.borisov.movies.databinding.FragmentSettingsBinding
+import com.borisov.movies.domain.IAppState
+import com.borisov.movies.ui.base.BaseFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 /**
  * @author Borisov Andrey on 27.06.2022
  **/
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.borisov.movies.databinding.FragmentSettingsBinding
+class SettingsFragment : BaseFragment<FragmentSettingsBinding>(R.layout.fragment_settings) {
 
-class SettingsFragment : Fragment() {
+    val viewModel: SettingsViewModel by viewModel()
 
-    private var _binding: FragmentSettingsBinding? = null
+    override fun initListeners() {}
 
-    private val binding get() = _binding!!
+    override fun initObservers() {}
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val slideshowViewModel =
-            ViewModelProvider(this).get(SettingsViewModel::class.java)
-
-        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-
-        val textView: TextView = binding.textSlideshow
-        slideshowViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    override fun renderData(result: IAppState) {}
 }
