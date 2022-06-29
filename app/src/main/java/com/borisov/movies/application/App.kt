@@ -16,7 +16,10 @@ class App : Application() {
             androidContext(applicationContext)
             modules(
                 listOf(
-                    Di.viewModelModule()
+                    Di.viewModelModule(),
+                    Di.apiModule(),
+                    Di.repositoryModule(),
+                    Di.useCasesModule()
                 )
             )
         }

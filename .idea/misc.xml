@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/drawable-v24/ic_no_image.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/drawable-v24/side_nav_bar.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
@@ -12,6 +13,8 @@
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/drawable/ic_menu_movies.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/drawable/ic_menu_settings.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1" />
+        <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/drawable/ripple.xml" value="0.1" />
+        <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/drawable/round_back.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/drawable/side_nav_bar.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/layout/activity_main_drawer.xml" value="0.1" />
@@ -20,6 +23,7 @@
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/layout/fragment_detail.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/layout/fragment_movies.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
+        <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/layout/movie_item.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/layout/nav_header_main.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
         <entry key="..\:/Users/boris/AndroidStudioProjects/Movies/app/src/main/res/menu/ic_menu_camera.xml" value="0.1" />

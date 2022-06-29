@@ -17,7 +17,7 @@ abstract class BaseFragment<VB : ViewBinding>(
     @LayoutRes contentLayoutId: Int,
 ) : Fragment(contentLayoutId) {
     private var binding: VB? = null
-    private val viewBinding: VB get() = binding!!
+    val viewBinding: VB get() = binding!!
 
     /**
      * Инициализация слушателей
@@ -46,6 +46,8 @@ abstract class BaseFragment<VB : ViewBinding>(
                 binding = it.invoke(null, layoutInflater, container, false) as VB
             }
 
+        initObservers()
+        initListeners()
         return viewBinding.root
     }
 

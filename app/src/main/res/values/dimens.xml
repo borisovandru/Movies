@@ -6,4 +6,6 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="nav_header_main_image_size">80dp</dimen>
+    <dimen name="zero">0dp</dimen>
+    <item name="recycler_span_count" format="integer" type="dimen">2</item>
 </resources>

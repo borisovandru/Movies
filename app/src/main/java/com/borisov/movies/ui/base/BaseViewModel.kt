@@ -7,7 +7,7 @@ import kotlinx.coroutines.*
  * @author Borisov Andrey on 28.06.2022
  **/
 abstract class BaseViewModel : ViewModel() {
-    private val viewModelScopeCoroutine = CoroutineScope(
+    val viewModelScopeCoroutine = CoroutineScope(
         Dispatchers.IO
                 + SupervisorJob()
                 + CoroutineExceptionHandler { _, throwable ->
