@@ -13,8 +13,7 @@ import kotlinx.coroutines.launch
  **/
 
 class MoviesViewModel(
-    private val moviesLiveData: MutableLiveData<AppState<MoviesResponse>>
-    = MutableLiveData<AppState<MoviesResponse>>(),
+    private val moviesLiveData: MutableLiveData<AppState<MoviesResponse>> = MutableLiveData<AppState<MoviesResponse>>(),
     private val getMoviesTopRatedUseCase: GetMoviesTopRatedUseCase,
 ) : BaseViewModel() {
 

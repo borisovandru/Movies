@@ -2,6 +2,8 @@ package com.borisov.movies.data.repository.datasource
 
 import com.borisov.movies.data.api.MovieApi
 import com.borisov.movies.domain.AppState
+import com.borisov.movies.domain.models.ActorsResponse
+import com.borisov.movies.domain.models.MovieResponse
 import com.borisov.movies.domain.models.MoviesResponse
 
 /**
@@ -13,6 +15,27 @@ class RemoteDataSourceImpl(private val movieApi: MovieApi) : RemoteDataSource {
             val result = movieApi.getMoviesTopRatedAsync(adult, page).await()
 
             if (result.movies.isNotEmpty()) {
+                AppState.Success(result)
+            } else {
+                AppState.Error(Exception(NO_DATA))
+            }
+        } catch (err: Exception) {
+            AppState.Error(err)
+        }
+
+    override suspend fun getMovieDetailById(movieId: Int): AppState<MovieResponse> =
+        try {
+            val result = movieApi.getMovieDetailByIdAsync(movieId).await()
+            AppState.Success(result)
+        } catch (err: Exception) {
+            AppState.Error(err)
+        }
+
+    override suspend fun getActorsList(movieId: Int): AppState<ActorsResponse> =
+        try {
+            val result = movieApi.getActorsListAsync(movieId).await()
+
+            if (result.cast.isNotEmpty()) {
                 AppState.Success(result)
             } else {
                 AppState.Error(Exception(NO_DATA))

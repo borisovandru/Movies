@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.borisov.movies.domain.AppState
 import com.borisov.movies.domain.IAppState
+import com.borisov.movies.ui.ToolbarListener
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -29,7 +31,20 @@ abstract class BaseFragment<VB : ViewBinding>(
      */
     abstract fun initObservers()
 
-    abstract fun renderData(result: IAppState)
+    protected fun renderData(result: IAppState) {
+        when (result) {
+            is AppState.Error -> {
+                showLoading(false)
+                showError(result.error)
+            }
+            is AppState.Loading -> showLoading(true)
+            is AppState.Success<*> -> renderSuccess(result)
+        }
+    }
+
+    abstract fun renderSuccess(result: AppState.Success<*>)
+    abstract fun showLoading(isShow: Boolean)
+    abstract fun showError(throwable: Throwable)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,5 +69,9 @@ abstract class BaseFragment<VB : ViewBinding>(
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    protected fun showToolBar(visible: Boolean) {
+        (requireActivity() as ToolbarListener).showToolBar(visible)
     }
 }

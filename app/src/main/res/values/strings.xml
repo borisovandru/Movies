@@ -10,4 +10,6 @@
     <string name="menu_movies">Фильмы</string>
     <string name="menu_detail">Детализация</string>
     <string name="menu_settings">Настройки</string>
+    <string name="description">Описание</string>
+    <string name="actor_list">Актерский состав</string>
 </resources>

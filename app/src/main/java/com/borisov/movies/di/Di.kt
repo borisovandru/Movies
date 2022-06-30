@@ -7,6 +7,8 @@ import com.borisov.movies.data.repository.MovieRepositoryImpl
 import com.borisov.movies.data.repository.datasource.RemoteDataSource
 import com.borisov.movies.data.repository.datasource.RemoteDataSourceImpl
 import com.borisov.movies.domain.repository.MovieRepository
+import com.borisov.movies.domain.usecases.GetActorsUseCase
+import com.borisov.movies.domain.usecases.GetMovieDetailByIdUseCase
 import com.borisov.movies.domain.usecases.GetMoviesTopRatedUseCase
 import com.borisov.movies.ui.detail.DetailViewModel
 import com.borisov.movies.ui.movies.MoviesViewModel
@@ -21,6 +23,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.Duration
 
 /**
  * @author Borisov Andrey on 28.06.2022
@@ -35,14 +38,16 @@ object Di {
         }
 
         viewModel() {
-            DetailViewModel()
+            DetailViewModel(
+                getMovieDetailByIdUseCase = get(),
+                getActorsUseCase = get()
+            )
         }
 
         viewModel() {
             SettingsViewModel()
         }
     }
-
 
     fun apiModule() = module {
         single<Interceptor> {
@@ -59,6 +64,10 @@ object Di {
                 .baseUrl(BuildConfig.MOVIE_BASE_URL)
                 .client(
                     OkHttpClient.Builder()
+                        .callTimeout(Duration.ofSeconds(15))
+                        .connectTimeout(Duration.ofSeconds(15))
+                        .readTimeout(Duration.ofSeconds(15))
+                        .writeTimeout(Duration.ofSeconds(15))
                         .addInterceptor(interceptor = get())
                         .addInterceptor(HttpLoggingInterceptor().apply {
                             level = HttpLoggingInterceptor.Level.BODY
@@ -92,6 +101,14 @@ object Di {
     fun useCasesModule() = module {
         factory<GetMoviesTopRatedUseCase> {
             GetMoviesTopRatedUseCase(repository = get())
+        }
+
+        factory<GetMovieDetailByIdUseCase> {
+            GetMovieDetailByIdUseCase(repository = get())
+        }
+
+        factory<GetActorsUseCase> {
+            GetActorsUseCase(repository = get())
         }
     }
 }
