@@ -4,8 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import com.borisov.movies.domain.AppState
 import com.borisov.movies.domain.models.MoviesResponse
 import com.borisov.movies.domain.usecases.GetMoviesTopRatedUseCase
+import com.borisov.movies.domain.usecases.SearchMoviesUseCase
 import com.borisov.movies.ui.base.BaseViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 
 /**
@@ -15,6 +17,7 @@ import kotlinx.coroutines.launch
 class MoviesViewModel(
     private val moviesLiveData: MutableLiveData<AppState<MoviesResponse>> = MutableLiveData<AppState<MoviesResponse>>(),
     private val getMoviesTopRatedUseCase: GetMoviesTopRatedUseCase,
+    private val searchMoviesUseCase: SearchMoviesUseCase
 ) : BaseViewModel() {
 
     private val allMovies: ArrayList<MoviesResponse.Movie> = arrayListOf()
@@ -23,7 +26,7 @@ class MoviesViewModel(
 
     fun setCurrentPage(value: Int, totalPage: Int) {
         if (value < totalPage) {
-            currentPage = value + ONE_VALUE
+            currentPage = value.plus(ONE_VALUE)
         }
     }
 
@@ -36,15 +39,25 @@ class MoviesViewModel(
             getMoviesLiveData().postValue(AppState.Loading)
             val movies = getMoviesTopRatedUseCase.execute(adult, page)
             if (movies is AppState.Success) {
-                when (val movies = movies.data) {
+                when (val moviesList = movies.data) {
                     is MoviesResponse -> {
-                        allMovies.addAll(movies.movies)
+                        allMovies.addAll(moviesList.movies)
                         getMoviesLiveData().postValue(
-                            AppState.Success<MoviesResponse>(movies.copy(movies = allMovies))
+                            AppState.Success<MoviesResponse>(moviesList.copy(movies = allMovies))
                         )
                     }
                 }
             }
+        }
+
+    fun searchMovies(query: String): Job =
+        viewModelScopeCoroutine.launch {
+            coroutineContext.cancelChildren()
+            allMovies.clear()
+            setCurrentPage(ONE_VALUE, ONE_VALUE)
+            getMoviesLiveData().postValue(AppState.Loading)
+            val movies = searchMoviesUseCase.execute(query)
+            getMoviesLiveData().postValue(movies)
         }
 
     companion object {

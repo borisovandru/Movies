@@ -43,6 +43,7 @@
     <dimen name="movie_item_poster_margin_top">4dp</dimen>
     <dimen name="fragment_detail_rating_progress_margin_start">20dp</dimen>
     <dimen name="fragment_detail_rating_progress_margin_top">-20dp</dimen>
+    <dimen name="fragment_movies_recycler_margin_top">16dp</dimen>
     <item name="recycler_span_count" format="integer" type="dimen">2</item>
     <item name="fragment_detail_backdrop_height_percent" format="float" type="dimen">0.4</item>
     <item name="fragment_detail_title_max_lines" format="integer" type="dimen">2</item>

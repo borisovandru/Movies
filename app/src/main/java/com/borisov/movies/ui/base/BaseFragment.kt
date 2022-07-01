@@ -16,10 +16,10 @@ import java.lang.reflect.ParameterizedType
  * @author Borisov Andrey on 28.06.2022
  **/
 abstract class BaseFragment<VB : ViewBinding>(
-    @LayoutRes contentLayoutId: Int,
+    @LayoutRes contentLayoutId: Int
 ) : Fragment(contentLayoutId) {
     private var binding: VB? = null
-    val viewBinding: VB get() = binding!!
+    protected val viewBinding: VB get() = binding!!
 
     /**
      * Инициализация слушателей
@@ -30,7 +30,6 @@ abstract class BaseFragment<VB : ViewBinding>(
      * Инициализация подписок
      */
     abstract fun initObservers()
-
     protected fun renderData(result: IAppState) {
         when (result) {
             is AppState.Error -> {
@@ -49,9 +48,9 @@ abstract class BaseFragment<VB : ViewBinding>(
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View? {
-        ((javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<*>)
+        ((javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VB>)
             .getMethod(
                 "inflate",
                 LayoutInflater::class.java,

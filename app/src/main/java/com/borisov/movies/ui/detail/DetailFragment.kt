@@ -1,28 +1,26 @@
 package com.borisov.movies.ui.detail
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
+import com.borisov.movies.BuildConfig
+import com.borisov.movies.R
+import com.borisov.movies.databinding.FragmentDetailBinding
+import com.borisov.movies.domain.AppState
+import com.borisov.movies.domain.models.ActorsResponse
+import com.borisov.movies.domain.models.MovieResponse
+import com.borisov.movies.ui.base.BaseFragment
+import com.borisov.movies.ui.detail.adapter.ActorAdapter
+import com.borisov.movies.utils.durationToString
+import com.borisov.movies.utils.getColorByValue
+import com.borisov.movies.utils.showSnakeBar
+import com.borisov.movies.utils.toDateString
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import  com.borisov.movies.BuildConfig
-import  com.borisov.movies.R
-import  com.borisov.movies.databinding.FragmentDetailBinding
-import  com.borisov.movies.domain.AppState
-import  com.borisov.movies.domain.models.ActorsResponse
-import  com.borisov.movies.domain.models.MovieResponse
-import  com.borisov.movies.ui.base.BaseFragment
-import  com.borisov.movies.ui.detail.adapter.ActorAdapter
-import  com.borisov.movies.utils.durationToString
-import  com.borisov.movies.utils.getColorByValue
-import  com.borisov.movies.utils.showSnakeBar
-import  com.borisov.movies.utils.toDateString
 import kotlin.math.roundToInt
 
 /**
@@ -65,7 +63,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
         super.onStop()
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun renderSuccess(result: AppState.Success<*>) {
         showLoading(false)
         when (val resultResponse = result.data) {
@@ -74,7 +71,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun renderMovie(resultResponse: MovieResponse) {
         with(viewBinding) {
             title.text = resultResponse.title
@@ -97,9 +93,14 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
             ratingValue.text = popular.toString()
             ratingProgress.setIndicatorColor(getColorByValue(popular))
 
-            toDateString(resultResponse.releaseDate)?.let {
-                release.text = it
+            resultResponse.releaseDate?.let { it ->
+                toDateString(it)?.let {
+                    if (it.isNotEmpty()) {
+                        release.text = it
+                    }
+                }
             }
+
             resultResponse.runtime?.let {
                 duration.text = durationToString(it)
             }

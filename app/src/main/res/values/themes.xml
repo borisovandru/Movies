@@ -29,4 +29,13 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
+    <style name="BaseEditTextStyle">
+        <item name="android:background">@color/white</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:textSize">@dimen/fragment_detail_text_size_default</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:inputType">text</item>
+    </style>
 </resources>

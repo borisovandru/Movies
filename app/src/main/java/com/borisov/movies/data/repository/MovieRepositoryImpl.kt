@@ -19,4 +19,7 @@ class MovieRepositoryImpl(private val dataSource: RemoteDataSource) : MovieRepos
 
     override suspend fun getActorsList(movieId: Int): AppState<ActorsResponse> =
         dataSource.getActorsList(movieId)
+
+    override suspend fun searchMovie(query: String): AppState<MoviesResponse> =
+        dataSource.searchMovie(query)
 }

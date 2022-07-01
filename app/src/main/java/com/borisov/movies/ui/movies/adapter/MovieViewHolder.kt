@@ -38,7 +38,9 @@ class MovieViewHolder(
             ratingProgress.setProgress(popular, true)
             ratingValue.text = popular.toString()
             ratingProgress.setIndicatorColor(getColorByValue(popular))
-            release.text = releaseDateToString(movie.releaseDate)
+            if (movie.releaseDate.isNullOrEmpty().not()) {
+                release.text = releaseDateToString(movie.releaseDate)
+            }
             Glide.with(poster)
                 .load(BuildConfig.MOVIE_POSTER_PATH.plus(movie.posterPath))
                 .apply(RequestOptions.bitmapTransform(RoundedCorners(IMAGE_RADIUS)))

@@ -39,26 +39,33 @@ fun getColorByValue(value: Int): Int =
     }
 
 fun toDateString(value: String): String? =
-    SimpleDateFormat(DATE_FORMAT_IN, Locale.getDefault())
-        .parse(value)?.let { date ->
-            SimpleDateFormat(DATE_FORMAT_OUT, Locale.getDefault()).format(date)
-        }
+    try {
+        SimpleDateFormat(DATE_FORMAT_IN, Locale.getDefault())
+            .parse(value)?.let { date ->
+                SimpleDateFormat(DATE_FORMAT_OUT, Locale.getDefault()).format(date)
+            }
+    } catch (err: Exception) {
+        null
+    }
 
 fun durationToString(duration: Int): String {
     val hours: Int = duration / 60
     val minutes: Int = duration % 60
     return String.format(TIME_STRING_TEMPLATE, hours, minutes)
-
 }
 
-fun releaseDateToString(date: String): String {
-    var result: String = ""
-    toDateString(date)?.let { date ->
-        date.split(" ").forEach {
-            result += it.replaceFirstChar(Char::titlecase) + " "
+fun releaseDateToString(date: String): String? {
+    return try {
+        var result: String = ""
+        toDateString(date)?.let { date ->
+            date.split(" ").forEach {
+                result += it.replaceFirstChar(Char::titlecase) + " "
+            }
         }
+        result
+    } catch (err: Exception) {
+        null
     }
-    return result
 }
 
 const val DATE_FORMAT_IN = "yyyy-MM-dd"

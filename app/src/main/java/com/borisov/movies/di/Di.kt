@@ -10,6 +10,7 @@ import com.borisov.movies.domain.repository.MovieRepository
 import com.borisov.movies.domain.usecases.GetActorsUseCase
 import com.borisov.movies.domain.usecases.GetMovieDetailByIdUseCase
 import com.borisov.movies.domain.usecases.GetMoviesTopRatedUseCase
+import com.borisov.movies.domain.usecases.SearchMoviesUseCase
 import com.borisov.movies.ui.detail.DetailViewModel
 import com.borisov.movies.ui.movies.MoviesViewModel
 import com.borisov.movies.ui.settings.SettingsViewModel
@@ -33,7 +34,8 @@ object Di {
 
         viewModel() {
             MoviesViewModel(
-                getMoviesTopRatedUseCase = get()
+                getMoviesTopRatedUseCase = get(),
+                searchMoviesUseCase = get()
             )
         }
 
@@ -109,6 +111,10 @@ object Di {
 
         factory<GetActorsUseCase> {
             GetActorsUseCase(repository = get())
+        }
+
+        factory<SearchMoviesUseCase> {
+            SearchMoviesUseCase(repository = get())
         }
     }
 }

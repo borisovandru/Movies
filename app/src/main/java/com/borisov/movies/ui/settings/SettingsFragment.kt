@@ -12,17 +12,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @author Borisov Andrey on 27.06.2022
  **/
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(R.layout.fragment_settings) {
-
     val viewModel: SettingsViewModel by viewModel()
 
     override fun initListeners() {}
-
     override fun initObservers() {}
-
     override fun renderSuccess(result: AppState.Success<*>) {}
-
     override fun showLoading(isShow: Boolean) {}
-
     override fun showError(throwable: Throwable) {
         viewBinding.root.showSnakeBar(throwable.localizedMessage)
     }

@@ -12,4 +12,5 @@ interface RemoteDataSource {
     suspend fun getMoviesTopRated(adult: Boolean, page: Int): AppState<MoviesResponse>
     suspend fun getMovieDetailById(movieId: Int): AppState<MovieResponse>
     suspend fun getActorsList(movieId: Int): AppState<ActorsResponse>
+    suspend fun searchMovie(query: String): AppState<MoviesResponse>
 }
